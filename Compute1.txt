@@ -1,0 +1,28 @@
+
+
+CREATE COMPUTE MODULE accountlookup_backend_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+        CREATE FIELD OutputRoot.JSON.Data;
+        DECLARE rOutput REFERENCE TO OutputRoot.JSON.Data;
+        
+        SET rOutput.correlationId ='TXN998877665511';
+        SET rOutput.status ='SUCCESS';
+        SET rOutput.statusCode ='0000';
+        SET rOutput.message ='Account inquiry completed successfully';
+        SET rOutput.accountNumber ='102938475612';
+        SET rOutput.accountTitle ='John Doe';
+        SET rOutput.currency ='USD';
+
+        SET rOutput.availableBalance ='12540.50';
+        SET rOutput.accountStatus ='ACTIVE';
+        --SET OutputRoot.HTTPResponseHeader."X-Original-HTTP-Status-Code" = '500';
+        
+        
+        --To Forward the Request Identifier to Reply Node.
+        SET OutputLocalEnvironment = InputLocalEnvironment;
+		RETURN TRUE;
+	END;
+END MODULE;
+
